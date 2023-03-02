@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+    
+    # elasticsearch:
+    #     image: docker.elastic.co/elasticsearch/elasticsearch:8.6.2
+    #     ports:
+    #         - "9200:9200"
+    #     volumes:
+    #         - elasticsearch
+
+    backend:
+        container_name: "fastapi"
+        build:
+            context: ./app
+        ports:
+            - "8000:8000"
+        volumes:
+            - ./app:/app
+        restart: always
+        environment:
+            - WATCHFILES_FORCE_POLLING=true
+
+
+
+  
