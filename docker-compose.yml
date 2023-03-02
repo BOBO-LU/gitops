@@ -20,6 +20,9 @@ services:
         restart: always
         environment:
             - WATCHFILES_FORCE_POLLING=true
+            - GUNICORN_WORKERS=2
+            - JSON_LOGS=0
+            - LOG_LEVEL=DEBUG
 
 
 
