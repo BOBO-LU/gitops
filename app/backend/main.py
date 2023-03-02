@@ -1,17 +1,15 @@
 from typing import Union
 import uvicorn
 from fastapi import FastAPI
-import pytz
-import datetime as dt
+from utils import get_tw_time
+
 
 app = FastAPI()
 
 
 @app.get("/")
 def read_root():
-    tw = pytz.timezone('Asia/Taipei')
-    twdt = tw.localize(dt.datetime.now()).strftime('%Y-%m-%d %H:%M:%S %Z%z')
-    return {"Hello": "World.", "Time": f"{twdt}"}
+    return {"Hello": "World.", "Time": f"{get_tw_time()}"}
 
 
 @app.get("/items/{item_id}")
