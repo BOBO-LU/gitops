@@ -31,7 +31,7 @@ jobs:
   
     # 建立測試，之後可以寫個 unit-test
     - name: Run Tests
+      working-directory: ./
       run: |
-        bash ./app/run_test.sh
-      with:
-        file: ./app/Dockerfile
+        script -e -c ./app/run_test.sh
+      
