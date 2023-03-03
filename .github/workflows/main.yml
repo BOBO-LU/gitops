@@ -33,5 +33,5 @@ jobs:
     # 建立測試，之後可以寫個 unit-test
     - name: Run Tests
       run: |
-        docker build -t pytest-runner .
+        docker build -f ./backend/Dockerfile -t pytest-runner .
       
