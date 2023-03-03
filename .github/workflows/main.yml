@@ -36,6 +36,6 @@ jobs:
         # script -e -c ./app/run_test.sh
         ENTRYPOINT="python -m pytest --cov=backend --html=test/report/report.html -W ignore::DeprecationWarning"
         script -e -c docker build -t pytest-runner .
-        script -e -c docker run --rm -it -v $(pwd)/app:/app pytest-runner $ENTRYPOINT
+        docker run -t --rm -it -v $(pwd)/app:/app pytest-runner $ENTRYPOINT
 
       
