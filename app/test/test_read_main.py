@@ -1,4 +1,4 @@
-from main import app  # Flask instance of the API
+from backend import app  # Flask instance of the API
 from fastapi.testclient import TestClient
 
 client = TestClient(app)

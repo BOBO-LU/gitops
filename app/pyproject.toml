@@ -17,6 +17,8 @@ asynctest = "^0.13.0"
 aiohttp = "^3.8.4"
 httpx = "^0.23.3"
 pytest-html = "^3.2.0"
+coverage = "^7.2.1"
+pytest-cov = "^4.0.0"
 
 
 [build-system]
@@ -27,4 +29,7 @@ build-backend = "poetry.core.masonry.api"
 [tool.pytest.ini_options]
 addopts = [
     "--import-mode=importlib",
+]
+pythonpath = [
+  ".", "backend", "app/backend"
 ]

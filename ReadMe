@@ -1,0 +1,5 @@
+# Test backend
+./app/run_test.sh
+
+# Run backend
+docker-compose up --build --abort-on-container-exit
