@@ -11,6 +11,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    
     strategy:
       max-parallel: 4
       matrix:
@@ -31,9 +32,6 @@ jobs:
   
     # 建立測試，之後可以寫個 unit-test
     - name: Run Tests
-      with:
-        path: backend
-        file: ./backend/Dockerfile
       run: |
-        bash ./app/run_test.sh
+        docker build -t pytest-runner .
       
