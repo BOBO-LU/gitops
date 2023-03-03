@@ -33,3 +33,5 @@ jobs:
     - name: Run Tests
       run: |
         bash ./app/run_test.sh
+      with:
+        file: ./app/Dockerfile
