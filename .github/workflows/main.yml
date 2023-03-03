@@ -30,6 +30,6 @@ jobs:
     #     pip install -r ./requirements.txt
   
     # 建立測試，之後可以寫個 unit-test
-    # - name: Run Tests
-    #   run: |
-    #     bash test.sh
+    - name: Run Tests
+      run: |
+        bash ./app/run_test.sh
