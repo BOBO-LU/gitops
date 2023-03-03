@@ -33,5 +33,5 @@ jobs:
     - name: Run Tests
       working-directory: ./app
       run: |
-        bash ./app/run_test.sh
+        bash ./run_test.sh
       
