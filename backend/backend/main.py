@@ -1,5 +1,4 @@
 from typing import Union
-import uvicorn
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from backend.utils import get_tw_time
@@ -21,29 +20,21 @@ app.add_middleware(
 )
 
 
-app.include_router(auth.router, tags=['Auth'], prefix='/api/auth')
-app.include_router(user.router, tags=['Users'], prefix='/api/users')
-app.include_router(post.router, tags=['Posts'], prefix='/api/posts')
+app.include_router(auth.router, tags=["Auth"], prefix="/api/auth")
+app.include_router(user.router, tags=["Users"], prefix="/api/users")
+app.include_router(post.router, tags=["Posts"], prefix="/api/posts")
 
 
 @app.get("/api/healthchecker")
 def read_root():
-    return {
-        "msg": "Hello World"
-    }
+    return {"msg": "Hello World"}
 
 
 @app.get("/api/basicinfo")
 def get_info():
-    return {
-        "app_name": settings.app_name,
-        "time": get_tw_time()
-    }
+    return {"app_name": settings.app_name, "time": get_tw_time()}
 
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
-    return {
-        "item_id": item_id,
-        "q": q
-    }
+    return {"item_id": item_id, "q": q}
