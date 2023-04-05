@@ -13,7 +13,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
-      max-parallel: 4
+      max-parallel: 1
       matrix:
         python-version: [3.9]
     steps:
@@ -42,13 +42,6 @@ jobs:
         ENTRYPOINT="python -m pytest --cov=backend --html=test/report/report.html -W ignore::DeprecationWarning"
         docker build -t pytest-runner .
   
-  deploy:
-    runs-on: ubuntu-latest
-    strategy:
-      max-parallel: 2
-      matrix:
-        python-version: [3.9]
-    steps:
     # 遠端部署
     - name: CD
       uses: appleboy/ssh-action@master
@@ -57,13 +50,13 @@ jobs:
         USERNAME: ${{ secrets.USERNAME }}
         KEY: ${{ secrets.SSHKEY }}
         script: |
-          cd ~
           curl -O https://gist.githubusercontent.com/kurokobo/25e41503eb060fee8d8bec1dd859eff3/raw/0d7cd29472f0eaa26ce424071456ad84b24fb318/installer.sh
           bash ./installer.sh
           source ~/.bashrc
+          cd ~
           git config --global user.email "luwenkai0820@gmail.com"
           git config --global user.name "BOBO-LU"
-          git pull
+          git pull https://github.com/BOBO-LU/gitops.git
           cd observe
           docker-compose up --build -d
 
