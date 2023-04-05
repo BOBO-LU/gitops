@@ -17,35 +17,35 @@ jobs:
       matrix:
         python-version: [3.9]
 
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.python-version }}
+    # steps:
+    #   - uses: actions/checkout@v2
+    #   - name: Set up Python ${{ matrix.python-version }}
+    #     uses: actions/setup-python@v1
+    #     with:
+    #       python-version: ${{ matrix.python-version }}
 
-      # 建立測試
-      - name: Run Tests
-        working-directory: ./app
-        run: |
-          ENTRYPOINT="python -m pytest --cov=backend --html=test/report/report.html -W ignore::DeprecationWarning"
-          docker build -t pytest-runner .
-          docker run -t --rm -v $(pwd):/app pytest-runner $ENTRYPOINT
+    #   # 建立測試
+    #   - name: Run Tests
+    #     working-directory: ./app
+    #     run: |
+    #       ENTRYPOINT="python -m pytest --cov=backend --html=test/report/report.html -W ignore::DeprecationWarning"
+    #       docker build -t pytest-runner .
+    #       docker run -t --rm -v $(pwd):/app pytest-runner $ENTRYPOINT
 
-      # 遠端部署
-      - name: CD
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          KEY: ${{ secrets.SSHKEY }}
-          script: |
-            cd ~
-            git config --global user.email "luwenkai0820@gmail.com"
-            git config --global user.name "BOBO-LU"
-            git pull
-            cd observe
-            docker-compose up --build -d
+    #   # 遠端部署
+    #   - name: CD
+    #     uses: appleboy/ssh-action@master
+    #     with:
+    #       host: ${{ secrets.HOST }}
+    #       USERNAME: ${{ secrets.USERNAME }}
+    #       KEY: ${{ secrets.SSHKEY }}
+    #       script: |
+    #         cd ~
+    #         git config --global user.email "luwenkai0820@gmail.com"
+    #         git config --global user.name "BOBO-LU"
+    #         git pull
+    #         cd observe
+    #         docker-compose up --build -d
 
 
     # 建立環境
