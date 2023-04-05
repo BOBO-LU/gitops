@@ -2,11 +2,10 @@ name: fastapi_CICD
 
 # 觸發條件
 on:
+  push:
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
-    types:
-      - closed
+    branches: [ main ]
 
 # 執行一項或多項任務
 jobs:
