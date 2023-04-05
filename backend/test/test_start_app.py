@@ -35,13 +35,12 @@ class TestApp(asynctest.TestCase):
     async def setUp(self):
         """ Bring server up. """
         app = App()
-        self.proc = Process(target=uvicorn.run,
-                            args=(app.api,),
-                            kwargs={
-                                "host": "127.0.0.1",
-                                "port": 8000,
-                                "log_level": "info"},
-                            daemon=True)
+        self.proc = Process(
+            target=uvicorn.run,
+            args=(app.api,),
+            kwargs={"host": "127.0.0.1", "port": 8000, "log_level": "info"},
+            daemon=True,
+        )
         self.proc.start()
         await asyncio.sleep(0.1)  # time for the server to start
 

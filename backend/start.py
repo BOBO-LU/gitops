@@ -1,17 +1,18 @@
 import os
 import logging
 import sys
-
+import uvicorn
 from gunicorn.app.base import BaseApplication
 from gunicorn.glogging import Logger
 from loguru import logger
 
-from main import app
+from backend.main import app
+from backend.utils import number_of_workers
 
 
 LOG_LEVEL = logging.getLevelName(os.environ.get("LOG_LEVEL", "DEBUG"))
 JSON_LOGS = True if os.environ.get("JSON_LOGS", "0") == "1" else False
-WORKERS = int(os.environ.get("GUNICORN_WORKERS", "5"))
+WORKERS = int(os.environ.get("GUNICORN_WORKERS", number_of_workers()))
 
 
 class InterceptHandler(logging.Handler):
@@ -28,7 +29,9 @@ class InterceptHandler(logging.Handler):
             frame = frame.f_back
             depth += 1
 
-        logger.opt(depth=depth, exception=record.exc_info).log(level, record.getMessage())
+        logger.opt(depth=depth, exception=record.exc_info).log(
+            level, record.getMessage()
+        )
 
 
 class StubbedGunicornLogger(Logger):
@@ -52,7 +55,8 @@ class StandaloneApplication(BaseApplication):
 
     def load_config(self):
         config = {
-            key: value for key, value in self.options.items()
+            key: value
+            for key, value in self.options.items()
             if key in self.cfg.settings and value is not None
         }
         for key, value in config.items():
@@ -62,7 +66,7 @@ class StandaloneApplication(BaseApplication):
         return self.application
 
 
-if __name__ == '__main__':
+def run():
     intercept_handler = InterceptHandler()
     # logging.basicConfig(handlers=[intercept_handler], level=LOG_LEVEL)
     # logging.root.handlers = [intercept_handler]
@@ -93,4 +97,11 @@ if __name__ == '__main__':
         "logger_class": StubbedGunicornLogger
     }
 
-    StandaloneApplication(app, options).run()
+    if os.getenv("ENV") == "prod":
+        StandaloneApplication(app, options).run()    
+    else:
+        uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)
+
+
+if __name__ == "__main__":
+    run()
