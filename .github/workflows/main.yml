@@ -31,7 +31,7 @@ jobs:
   
     # 建立測試，之後可以寫個 unit-test
     - name: Run Tests
-      working-directory: ./app
+      working-directory: ./backend
       run: |
         ENTRYPOINT="python -m pytest --cov=backend --html=test/report/report.html -W ignore::DeprecationWarning"
         docker build -t pytest-runner .
