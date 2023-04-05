@@ -1,11 +1,12 @@
-name: fasapi CICD
+name: fastapi_CICD
 
 # 觸發條件
 on:
-  push:
-    branches: [main]
   pull_request:
-    branches: [main]
+    branches:
+      - main
+    types:
+      - closed
 
 # 執行一項或多項任務
 jobs:
