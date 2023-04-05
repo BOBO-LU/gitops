@@ -1,5 +1,5 @@
 import uuid
-from backend.database import schemas, models
+from backend import schemas, models
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status, APIRouter, Response
 from backend.database.database import get_db

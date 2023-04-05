@@ -11,7 +11,7 @@ services:
 
     postgres:
         image: postgres:13.3
-        container_name: postgres
+        container_name: observe-postgres
         ports:
             - "5432:5432"
         env_file:
@@ -20,7 +20,7 @@ services:
             - postgres-db:/var/lib/postgresql/data
 
     backend:
-        container_name: "fastapi"
+        container_name: observe-fastapi
         build:
             context: ./backend
         ports:

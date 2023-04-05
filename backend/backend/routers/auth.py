@@ -3,7 +3,7 @@ from fastapi import APIRouter, Request, Response, status, Depends, HTTPException
 from pydantic import EmailStr
 
 from backend.auth import oauth2
-from backend.database import schemas, models
+from backend import schemas, models
 from backend import utils
 from sqlalchemy.orm import Session
 from backend.database.database import get_db
