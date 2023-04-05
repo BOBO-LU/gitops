@@ -56,6 +56,6 @@ jobs:
           git config --global user.name "BOBO-LU"
           git pull https://github.com/BOBO-LU/gitops.git
           cd /home/freegcp0001/gitops
-          docker-compose up --build -d
+          sudo docker-compose up --build -d
 
 
