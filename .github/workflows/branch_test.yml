@@ -1,0 +1,38 @@
+name: branch push unit-test
+
+# 觸發條件
+on:
+  push:
+    branches:
+      - '*'
+      - '!master'
+      - '!develop'
+
+# 執行一項或多項任務
+jobs:
+  build:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 1
+      matrix:
+        python-version: [3.9]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+  
+    # 寫入環境變數
+    - name: Create env file
+      working-directory: ./backend
+      run: |
+        echo "${{ secrets.ENV_FILE }}" > .env
+
+    # 建立測試，之後可以寫個 unit-test
+    - name: Run Tests
+      working-directory: ./backend
+      run: |
+        ENTRYPOINT="python -m pytest --cov=backend --html=test/report/report.html -W ignore::DeprecationWarning"
+        docker build -t pytest-runner .
