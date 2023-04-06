@@ -28,7 +28,7 @@ services:
         ports:
             - "8000:8000"
         volumes:
-            - ./:/
+            - ./:./
         restart: always
         environment:
             - WATCHFILES_FORCE_POLLING=true
