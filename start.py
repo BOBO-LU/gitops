@@ -12,6 +12,9 @@ loguru.logger.info(f"pwd: {os.getcwd()}")
 filenames = next(os.walk(os.getcwd()), (None, None, []))[2]
 loguru.logger.info(f"filenames: {filenames}")
 
+# read text and print it
+with open(".env", "r") as f:
+    loguru.logger.info(f.read())
 
 from app.main import app
 from app.utils import number_of_workers
