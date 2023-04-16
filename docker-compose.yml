@@ -40,7 +40,12 @@ services:
             - postgres
         networks:
             - teamatch-network
-    
+        deploy:
+            resources:
+                limits:
+                    memory: 500M
+                reservations:
+                    memory: 128M
 
                 
 
