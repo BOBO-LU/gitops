@@ -47,7 +47,7 @@ jobs:
         docker-compose exec --no-TTY backend pip3 install pytest
 
         echo "Start run pytest"
-        docker-compose exec --no-TTY backend $ENTRYPOINT
+        docker-compose exec -T backend $ENTRYPOINT
         
     - name: log
       continue-on-error: true
