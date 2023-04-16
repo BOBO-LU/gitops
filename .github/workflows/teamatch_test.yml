@@ -30,7 +30,6 @@ jobs:
       run: |
         echo "Start creating .env file"
         echo "${{ secrets.ENV_FILE }}" > .env
-        echo "${{ secrets.ENV_FILE }}" > ./backend/env
         echo $PWD
     - name: Run test
       working-directory: ./
