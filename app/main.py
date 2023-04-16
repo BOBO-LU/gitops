@@ -9,6 +9,12 @@ from starlette.responses import HTMLResponse
 from starlette.requests import Request
 from starlette.middleware.sessions import SessionMiddleware
 
+import os
+import loguru
+loguru.logger.info(f"pwd: {os.getcwd()}")
+filenames = next(os.walk(os.getcwd()), (None, None, []))[2]
+loguru.logger.info(f"filenames: {filenames}")
+
 app = FastAPI(title=settings.APP_NAME, openapi_url=f"{settings.API_V1_STR}/openapi.json)")
 
 origins = [str(origin) for origin in settings.BACKEND_CORS_ORIGINS]
