@@ -7,7 +7,7 @@ class Settings(BaseSettings):
     APP_NAME: str = "teamatch-backend"
     API_V1_STR: str = "/api/v1"
     test_int: int = 50
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = ["http://localhost/", "http://localhost:4200/", "http://localhost:3000/", "http://localhost:8080/", "https://localhost/", "https://localhost:4200/", "https://localhost:3000/", "https://localhost:8080/", "http://dev.sdm-teamatch.com/", "https://stag.sdm-teamatch.com/", "https://sdm-teamatch.com/"]
 
     # @validator("BACKEND_CORS_ORIGINS", pre=True)
     # def assemble_cors_origins(cls, v: Union[str, List[str]]) -> Union[List[str], str]:
