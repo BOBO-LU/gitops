@@ -49,5 +49,6 @@ jobs:
         docker-compose exec --no-TTY backend $ENTRYPOINT
         
     - name: log
+      continue-on-error: true
       run: |
         docker-compose logs
