@@ -48,3 +48,6 @@ jobs:
         echo "Start run pytest"
         docker-compose exec -T backend $ENTRYPOINT
         
+    - name: log
+      run: |
+        docker-compose logs
