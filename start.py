@@ -6,6 +6,13 @@ from gunicorn.app.base import BaseApplication
 from gunicorn.glogging import Logger
 from loguru import logger
 
+import os
+import loguru
+loguru.logger.info(f"pwd: {os.getcwd()}")
+filenames = next(os.walk(os.getcwd()), (None, None, []))[2]
+loguru.logger.info(f"filenames: {filenames}")
+
+
 from app.main import app
 from app.utils import number_of_workers
 
